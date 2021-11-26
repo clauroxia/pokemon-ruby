@@ -5,29 +5,29 @@ class Game
   include Initials
   def start
     welcome
-    # player_name = name_validation
-    # pokemon = pokemon_validation
-    # name_pokemon_validation(pokemon, player_name)
+    player_name = validate_name
+    pokemon = validate_pokemon
+
+    validate_pokemon_name(pokemon, player_name)
     # # Then create a Player with that information and store it in @player
 
-    # # Suggested game flow
-    # display_menu_options
-    # action = option_validation.capitalize
+    # Suggested game flow
+    action = validate_options
     until action == "Exit"
       case action
       when "Train"
-        # train
-        action = option_validation.capitalize
+        p 'You chose to train'
+        action = validate_options
       when "Leader"
-        # challenge_leader
-        action = option_validation.capitalize
+        p 'You chose to challenge the leader'
+        action = validate_options
       when "Stats"
-        # show_stats
-        action = option_validation.capitalize
+        p 'You chose to see your stats'
+        action = validate_options
       end
     end
 
-    goodbye
+    # goodbye
   end
 
   def train

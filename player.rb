@@ -1,5 +1,4 @@
 # require neccesary files
-
 class Player
   # (Complete parameters)
   def initialize

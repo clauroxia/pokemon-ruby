@@ -4,7 +4,7 @@ require_relative "pokemon"
 class Game
   include Initials
   def start
-    # welcome
+    welcome
     @player_name = validate_name
     @pokemon = validate_pokemon
 
@@ -12,13 +12,13 @@ class Game
 
     # puts @pokemon_name
     @starter = Pokemon.new(@pokemon, @pokemon_name)
-    puts @starter.name
     # puts @starter.name
-    # puts @starter.type
-    # puts @starter.base_exp
-    # puts @starter.effort_points
-    # puts @starter.growth_rate
-    # puts @starter.moves
+    puts @starter.name
+    puts @starter.type
+    puts @starter.base_exp
+    puts @starter.effort_points
+    puts @starter.growth_rate
+    puts @starter.moves
     # # Then create a Player with that information and store it in @player
 
     # Suggested game flow

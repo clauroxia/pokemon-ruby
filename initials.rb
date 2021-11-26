@@ -105,13 +105,16 @@ module Initials
 
   def validate_pokemon_name(pokemon, player)
     puts "Do you want to give your pokemon a name?"
+
     print "> "
-
+    puts pokemon
     pokemon_name = gets.chomp
-    pokemon_name = pokemon if pokemon_name.strip.empty?
 
+    pokemon_name = (pokemon_name == nil) || pokemon_name.strip.empty? ? pokemon : pokemon_name
+    
     puts "#{player.upcase}, raise your young #{pokemon_name.upcase} by making it fight!"
     puts "When you feel ready you can challenge BROCK, the PEWTER's GYM LEADER"
+    return pokemon_name
   end
 
   def validate_options

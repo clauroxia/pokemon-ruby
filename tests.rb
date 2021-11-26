@@ -1,8 +1,10 @@
 # require neccesary files
 require_relative "initials"
 require_relative "pokemon"
+require_relative 'stats'
 class Game
   include Initials
+  include Stats_formulas
   def start
     # welcome
     @player_name = validate_name
@@ -11,8 +13,8 @@ class Game
     @pokemon_name = validate_pokemon_name(@pokemon, @player_name)
 
     # puts @pokemon_name
-    @starter = Pokemon.new(@pokemon, @pokemon_name)
-    puts @starter.name
+    @starter =  .new(@pokemon, @pokemon_name)
+    # puts @starter
     # puts @starter.name
     # puts @starter.type
     # puts @starter.base_exp
@@ -32,7 +34,7 @@ class Game
         p 'You chose to challenge the leader'
         action = validate_options
       when "Stats"
-        p 'You chose to see your stats'
+        show_stats
         action = validate_options
       end
     end
@@ -49,7 +51,27 @@ class Game
   end
 
   def show_stats
-    # Complete this
+    intro_data = {
+      name: @starter.name, 
+      kind: @starter.species, 
+      level: @starter.level, 
+      type: @starter.type
+    }
+
+    intro_data.each do |data_name, value|
+      case data_name
+      when :name
+        puts "\n#{value}:"
+      else
+        puts "#{data_name.capitalize}: #{value.class == Array ? value.join(", ") : value}"
+      end
+    end
+
+    stats = @starter.stats
+    puts "\nStats:"
+    stats.each do |stat_name, value|
+      puts "#{stat_name.capitalize}: #{value}"
+    end
   end
 
   def goodbye

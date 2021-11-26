@@ -1,10 +1,10 @@
 module Initials
   def welcome
     puts "#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#
-    #$#$#$#$#$#$#$                               $#$#$#$#$#$#$#
-    #$##$##$##$ ---        Pokemon Ruby         --- #$##$##$#$#
-    #$#$#$#$#$#$#$                               $#$#$#$#$#$#$#
-    #$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#\n\n"
+#$#$#$#$#$#$#$                               $#$#$#$#$#$#$#
+#$##$##$##$ ---        Pokemon Ruby         --- #$##$##$#$#
+#$#$#$#$#$#$#$                               $#$#$#$#$#$#$#
+#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#\n\n"
     puts "Hello there! Welcome to the world of POKEMON! My name is OAK!
     People call me the POKEMON PROF!\n\n"
 
@@ -21,10 +21,10 @@ module Initials
       print "> "
       player = gets.chomp
     end
-    puts "Right! So your name is GREAT MASTER!"
+    puts "Right! So your name is #{player.upcase}!"
     puts "Your very own POKEMON legend is about to unfold! A world of"
     puts "dreams and adventures with POKEMON awaits! Let's go!"
-    puts "Here, GREAT MASTER! There are 3 POKEMON here! Haha!"
+    puts "Here, #{player.upcase}! There are 3 POKEMON here! Haha!"
     puts "When I was young, I was a serious POKEMON trainer."
     puts "In my old age, I have only 3 left, but you can have one! Choose!"
     return player
@@ -51,7 +51,7 @@ module Initials
     print "> "
     pokemon_name = gets.chomp
 
-    pokemon_name = (pokemon_name == nil) || pokemon_name.strip.empty? ? pokemon : pokemon_name
+    pokemon_name = (pokemon_name == nil) || pokemon_name.strip.empty? ? pokemon.capitalize : pokemon_name.capitalize
     
     puts "#{player.upcase}, raise your young #{pokemon_name.upcase} by making it fight!"
     puts "When you feel ready you can challenge BROCK, the PEWTER's GYM LEADER"
@@ -94,7 +94,7 @@ end
 ##################################################################
 # Methods
 ##################################################################
-def stats(pokemon)
-  puts "HP: #{pokemon.hp}   Attack: #{pokemon.attack}   Defense: #{pokemon.defense}   Speed: #{pokemon.speed}"
-end
+# def stats(pokemon)
+#   puts "HP: #{pokemon.hp}   Attack: #{pokemon.attack}   Defense: #{pokemon.defense}   Speed: #{pokemon.speed}"
+# end
 

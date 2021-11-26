@@ -1,34 +1,55 @@
-puts "#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#
-#$#$#$#$#$#$#$                               $#$#$#$#$#$#$#
-#$##$##$##$ ---        Pokemon Ruby         --- #$##$##$#$#
-#$#$#$#$#$#$#$                               $#$#$#$#$#$#$#
-#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#\n\n"
-puts "Hello there! Welcome to the world of POKEMON! My name is OAK!
-People call me the POKEMON PROF!\n\n"
-puts "This world is inhabited by creatures called POKEMON! For some
-people, POKEMON are pets. Others use them for fights. Myself...
-I study POKEMON as a profession."
-puts "First, what is your name?"
-print "> "
-player = gets.chomp
-puts "Right! So your name is #{player.upcase}!
-Your very own POKEMON legend is about to unfold! A world of
-dreams and adventures with POKEMON awaits! Let's go!
-Here, #{player.upcase}! There are 3 POKEMON here! Haha!
-When I was young, I was a serious POKEMON trainer.
-In my old age, I have only 3 left, but you can have one! Choose!\n\n"
-puts "1. Bulbasaur    2. Charmander   3. Squirtle"
-print "> "
-pokemon = gets.chomp
-initials = ["Bulbasaur", "Charmander", "Squirtle"]
-until initials.find { |initial| pokemon == initial}
-  print "> "
-  pokemon = gets.chomp
+# require neccesary files
+require_relative 'initials'
+
+class Game
+  include Initials
+  def start
+    welcome
+    # player_name = name_validation
+    # pokemon = pokemon_validation
+    # name_pokemon_validation(pokemon, player_name)
+    # # Then create a Player with that information and store it in @player
+
+    # # Suggested game flow
+    # display_menu_options
+    # action = option_validation.capitalize
+    until action == "Exit"
+      case action
+      when "Train"
+        # train
+        action = option_validation.capitalize
+      when "Leader"
+        # challenge_leader
+        action = option_validation.capitalize
+      when "Stats"
+        # show_stats
+        action = option_validation.capitalize
+      end
+    end
+
+    goodbye
+  end
+
+  def train
+    # Complete this
+  end
+
+  def challenge_leader
+    # Complete this
+  end
+
+  def show_stats
+    # Complete this
+  end
+
+  def goodbye
+    # Complete this
+  end
+
+  def menu
+    # Complete this
+  end
 end
-puts "\n\nYou selected #{pokemon.upcase}. Great choice!"
-puts "Give your pokemon a name?"
-print "> "
-pokemon_name = gets.chomp
 
-
-Ausitn
+game = Game.new
+game.start

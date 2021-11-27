@@ -1,11 +1,12 @@
 require_relative "initials"
 require_relative "pokemon"
 require_relative 'stats'
+require_relative 'battle'
 class Game
   include Initials
   include Stats_formulas
   def start
-    welcome
+    # welcome
     @player_name = validate_name
     @pokemon = validate_pokemon
 
@@ -20,7 +21,8 @@ class Game
     until action == "Exit"
       case action
       when "Train"
-        p 'You chose to train'
+        # p 'You chose to train'
+        train
         action = validate_options
       when "Leader"
         p 'You chose to challenge the leader'
@@ -36,6 +38,9 @@ class Game
 
   def train
     # Complete this
+    bot_pokemon = Pokemon.new("Ratata", "Ratata")
+    battle = Battle.new(@starter, bot_pokemon)
+    battle.start
   end
 
   def challenge_leader
@@ -77,3 +82,8 @@ end
 
 game = Game.new
 game.start
+# arr = [1,2,3,4,5,6,7,8,9,10]
+# # puts arr.reverse.find { |e| e < 11 }
+# puts arr.reverse.find_index { |e| e < 8 }
+
+# puts arr.index(7)

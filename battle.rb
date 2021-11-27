@@ -1,12 +1,15 @@
 class Battle
   # (complete parameters)
-  def initialize
+  def initialize(player, bot)
     # Complete this
+    @player = player
+    @bot = bot
   end
 
   def start
+    winner = @player
+    winner.increase_stats(@bot)
     # Prepare the Battle (print messages and prepare pokemons)
-
     # Until one pokemon faints
     # --Print Battle Status
     # --Both players select their moves

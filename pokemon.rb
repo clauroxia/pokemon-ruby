@@ -5,7 +5,7 @@ class Pokemon
   include Stats_formulas
   # include neccesary modules
   # all these accesor just for testing purposes
-  attr_accessor :species, :name, :type, :base_exp, :effort_points, :growth_rate, :hp, :attack, :defense, :speed, :moves, :base_stats, :level, :stats
+  attr_accessor :species, :name, :type, :base_exp, :effort_points, :growth_rate, :hp, :attack, :defense, :speed, :moves, :base_stats, :level, :stats, :exp_points
 
   def initialize (selected_pokemon, name)
     # Retrieve pokemon info from Pokedex and set instance variables
@@ -28,15 +28,12 @@ class Pokemon
 
     @individual_values = {hp: rand(0..31), attack: rand(0..31), defense: rand(0..31), special_attack: rand(0..31), special_defense: rand(0..31), speed: rand(0..31) } # extract this random number generation from a module or something
 
-    @effort_points = pokemon[:effort_points]
-
     @effort_values = {hp: 0, attack: 0, defense: 0, special_attack: 0, special_defense: 0, speed: 0 }
     
     @stats = {hp: 0, attack: 0, defense: 0, special_attack: 0, special_defense: 0, speed: 0 }
 
     @level = 1 # magic number
     @exp_points = 0 if @level == 1
-    check_level_up
     calculate_stats
   end
   # Calculate Individual Values and store them in instance variable (DONE)
@@ -82,11 +79,27 @@ class Pokemon
     # Else, print "But it MISSED!"
   # end
 
-  def increase_stats(target)
+  def increase_stats(defeated_pokemon)
     # Increase stats base on the defeated pokemon and print message "#[pokemon name] gained [amount] experience points"
-    
-    # If the new experience point are enough to level up, do it and print
-    # message "#[pokemon name] reached level [level]!" # -- Re-calculate the stat
+
+    # lets imagine we already have a defeated pokemon here
+    ##############
+    # INCREASE XP
+    ##############
+    gained_exp = calculate_gain_exp(defeated_pokemon)
+    @exp_points += gained_exp
+
+    puts "#{@name} gained #{gained_exp} experience points"
+
+    ##############
+    # INCREASE EFFORT POINTS
+    ##############
+    effort_points = defeated_pokemon.effort_points
+    @effort_values[effort_points[:type]] += effort_points[:amount]
+
+    puts "#{@name} reached level #{@level}!" if check_level_up && @level != 1
+    puts "Exp_points: #{@exp_points}"
+    calculate_stats
   end
 
   # private methods:
@@ -97,8 +110,16 @@ class Pokemon
     lvl_table = Pokedex::LEVEL_TABLES[@growth_rate]
 
     base_exp_at_crr_level = lvl_table[@level - 1]
+    puts "base_exp_at_crr_level: #{base_exp_at_crr_level}"
 
-    @level = lvl_table.find_index(base_exp_at_crr_level) + 1 if @exp_points >= base_exp_at_crr_level
+    new_level = lvl_table.reverse.find { |exp| exp <= @exp_points }
+
+    # return true
+    if @exp_points >= base_exp_at_crr_level
+      previous_level = @level
+      @level = lvl_table.index(new_level) + 1
+      return previous_level != @level
+    end
   end
 
   def calculate_stats

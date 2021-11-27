@@ -22,9 +22,8 @@ class Battle
     # Until one pokemon faints
     # --Print Battle Status
     # --Both players select their moves
-    damage = calc_damage
+    damage = calc_damage(@bot.pokemon.type)
     puts "Player #{@player.pokemon.name} used #{@movement[:name]} and dealt #{damage} damage to #{@bot.pokemon.name}!"
-    first_and_after_round
     # --Calculate which go first and which second
 
     # --First attack second
@@ -34,6 +33,7 @@ class Battle
 
     # Check which player won and print messages
     # If the winner is the Player increase pokemon stats
+    first_and_after_round
   end
   
   def first_and_after_round

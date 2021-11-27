@@ -4,7 +4,7 @@ require_relative 'stats'
 require_relative 'battle'
 class Game
   include Initials
-  include Stats_formulas
+  include Stat_formulas
   def start
     # welcome
     @player_name = validate_name

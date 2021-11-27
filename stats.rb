@@ -1,5 +1,5 @@
 # require './pokedex/pokemons.rb'
-module Stats_formulas
+module Stat_formulas
   # needed data
   def hp_stat
     ((2 * @base_stats[:hp] + @individual_values[:hp] + @effort_values[:hp]) * @level / 100 + @level + 10).floor
@@ -15,5 +15,20 @@ module Stats_formulas
 
   def calculate_gain_exp(defeated_pokemon) 
     (defeated_pokemon.base_exp * defeated_pokemon.level / 7.0).floor
+  end
+end
+
+# INCOMPLETE MODULE
+module Damage_formulas
+  def calc_damage
+    (((2 * @player.level / 5.0 + 2).floor * calc_special_mov(@player.stats[:special_attack], 'attack') * @movement[:power] / calc_special_mov(@player.stats[:special_defense], 'defense')).floor / 50.0).floor + 2
+  end
+
+  def calc_special_mov(mov, option)
+    if @special_movs_list.include?(@movement[:type])
+      mov 
+    else
+      option == 'attack' ? @player.stats[:attack] : @player.stats[:defense]
+    end
   end
 end

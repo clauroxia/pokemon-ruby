@@ -14,15 +14,16 @@ class Battle
   end
   
   def start
-    winner = @player
-    winner.increase_stats(@bot)
+    winner_pok = @player.pokemon
+    winner_pok.increase_stats(@bot.pokemon)
+    
     # Prepare the Battle (print messages and prepare pokemons)
     # Until one pokemon faints
     # --Print Battle Status
     # --Both players select their moves
-    damage = calc_damage
-    puts "Player #{@player.name} used #{@movement[:name]} and dealt #{damage} damage to #{@bot.name}!"
-    
+    damage = calc_damage(@bot.pokemon.type)
+    puts "Player #{@player.pokemon.name} used #{@movement[:name]} and dealt #{damage} damage to #{@bot.pokemon.name}!"
+
     # --Calculate which go first and which second
 
     # --First attack second

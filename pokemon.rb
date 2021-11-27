@@ -2,7 +2,7 @@
 require_relative 'pokedex/pokemons'
 require_relative 'stats'
 class Pokemon
-  include Stats_formulas
+  include Stat_formulas
   # include neccesary modules
   # all these accesor just for testing purposes
   attr_accessor :species, :name, :type, :base_exp, :effort_points, :growth_rate, :hp, :attack, :defense, :speed, :moves, :base_stats, :level, :stats, :exp_points
@@ -19,10 +19,6 @@ class Pokemon
     @growth_rate = pokemon[:growth_rate]
 
     @base_stats = pokemon[:base_stats]
-    # @hp = @base_stats[:hp]
-    # @attack = @base_stats[:attack]
-    # @defense = @base_stats[:defense]
-    # @speed = @base_stats[:speed]
   
     @moves = pokemon[:moves]
 

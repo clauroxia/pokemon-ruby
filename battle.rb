@@ -21,9 +21,9 @@ class Battle
     # Until one pokemon faints
     # --Print Battle Status
     # --Both players select their moves
-    damage = calc_damage
+    damage = calc_damage(@bot.pokemon.type)
     puts "Player #{@player.pokemon.name} used #{@movement[:name]} and dealt #{damage} damage to #{@bot.pokemon.name}!"
-    
+
     # --Calculate which go first and which second
 
     # --First attack second

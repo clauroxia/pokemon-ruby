@@ -1,5 +1,5 @@
 # require neccesary files
-require './pokedex/pokemons.rb'
+require_relative 'pokedex/pokemons'
 require_relative 'stats'
 class Pokemon
   include Stats_formulas

@@ -7,7 +7,7 @@ class Pokemon
   # all these accesor just for testing purposes
   attr_accessor :species, :name, :type, :base_exp, :effort_points, :growth_rate, :hp, :attack, :defense, :speed, :moves, :base_stats, :level, :stats, :exp_points
 
-  def initialize (selected_pokemon, name)
+  def initialize (selected_pokemon, name, level)
     # Retrieve pokemon info from Pokedex and set instance variables
     pokemon = Pokedex::POKEMONS["#{selected_pokemon.capitalize}"]
 
@@ -28,8 +28,8 @@ class Pokemon
     
     @stats = {hp: 0, attack: 0, defense: 0, special_attack: 0, special_defense: 0, speed: 0 }
 
-    @level = 1 # magic number
-    @exp_points = 0 if @level == 1
+    @level = level # magic number
+    @exp_points = 0
     calculate_stats
   end
   # Calculate Individual Values and store them in instance variable (DONE)

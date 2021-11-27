@@ -1,4 +1,3 @@
-# require './pokedex/pokemons.rb'
 module Stat_formulas
   # needed data
   def hp_stat
@@ -21,14 +20,14 @@ end
 # INCOMPLETE MODULE
 module Damage_formulas
   def calc_damage
-    (((2 * @player.level / 5.0 + 2).floor * calc_special_mov(@player.stats[:special_attack], 'attack') * @movement[:power] / calc_special_mov(@player.stats[:special_defense], 'defense')).floor / 50.0).floor + 2
+    (((2 * @player.pokemon.level / 5.0 + 2).floor * calc_special_mov(@player.pokemon.stats[:special_attack], 'attack') * @movement[:power] / calc_special_mov(@player.pokemon.stats[:special_defense], 'defense')).floor / 50.0).floor + 2
   end
 
   def calc_special_mov(mov, option)
     if @special_movs_list.include?(@movement[:type])
       mov 
     else
-      option == 'attack' ? @player.stats[:attack] : @player.stats[:defense]
+      option == 'attack' ? @player.pokemon.stats[:attack] : @player.pokemon.stats[:defense]
     end
   end
 end

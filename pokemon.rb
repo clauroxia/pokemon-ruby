@@ -9,9 +9,10 @@ class Pokemon
   # all these accesor just for testing purposes
   attr_accessor :species, :name, :type, :base_exp, :effort_points, :growth_rate, :hp, :attack, :defense, :speed, :moves, :base_stats, :level, :stats, :exp_points, :effort_values
 
-  def initialize (selected_pokemon, name, level)
+
+  def initialize(selected_pokemon, name, level)
     # Retrieve pokemon info from Pokedex and set instance variables
-    pokemon = Pokedex::POKEMONS["#{selected_pokemon.capitalize}"]
+    pokemon = Pokedex::POKEMONS[selected_pokemon.capitalize.to_s]
 
     @name = name
     @species = pokemon[:species]
@@ -21,14 +22,14 @@ class Pokemon
     @growth_rate = pokemon[:growth_rate]
 
     @base_stats = pokemon[:base_stats]
-  
+
     @moves = pokemon[:moves]
 
-    @individual_values = {hp: rand(0..31), attack: rand(0..31), defense: rand(0..31), special_attack: rand(0..31), special_defense: rand(0..31), speed: rand(0..31) } # extract this random number generation from a module or something
+    @individual_values = { hp: rand(0..31), attack: rand(0..31), defense: rand(0..31), special_attack: rand(0..31), special_defense: rand(0..31), speed: rand(0..31) } # extract this random number generation from a module or something
 
-    @effort_values = {hp: 0, attack: 0, defense: 0, special_attack: 0, special_defense: 0, speed: 0 }
-    
-    @stats = {hp: 0, attack: 0, defense: 0, special_attack: 0, special_defense: 0, speed: 0 }
+    @effort_values = { hp: 0, attack: 0, defense: 0, special_attack: 0, special_defense: 0, speed: 0 }
+
+    @stats = { hp: 0, attack: 0, defense: 0, special_attack: 0, special_defense: 0, speed: 0 }
 
     @level = level # magic number
     @exp_points = 0
@@ -46,6 +47,7 @@ class Pokemon
   
   # Calculate pokemon stats and store them in instance variable 
   def prepare_for_battle(player, option)
+
     # Complete this
     case option
     when 'player'
@@ -82,6 +84,7 @@ class Pokemon
     # -- Inflict damage to target and print message "And it hit [target name] with [damage] damage""
     # Else, print "But it MISSED!"
   end
+
 
   def increase_stats(defeated_pokemon)
     # Increase stats base on the defeated pokemon and print message "#[pokemon name] gained [amount] experience points"
@@ -130,6 +133,7 @@ class Pokemon
       previous_level = self.level
       self.level = lvl_table.index(new_level) + 1
       return previous_level != self.level
+
     end
   end
 

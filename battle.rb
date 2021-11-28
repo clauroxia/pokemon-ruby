@@ -16,6 +16,8 @@ class Battle
     
 
     turn_order
+    display_winner
+    reset_hp
     # display_winner
     # Prepare the Battle (print messages and prepare pokemons)
     # Until one pokemon faints
@@ -55,6 +57,10 @@ class Battle
 
       display_movs(first_move, second_move)
     end
+  end
+
+  def reset_hp 
+    @player.pokemon.calculate_stats
   end
 
   def compare_priorities
@@ -102,10 +108,14 @@ class Battle
   end
 
   def display_winner
-    winner_pok = @player.pokemon
-    winner_pok.increase_stats(@bot.pokemon)
-    puts "Player #{@player.name} won the battle!"
-    puts
+    winner_pok = @player.pokemon.fainted? ? @bot.pokemon : @player.pokemon
+    losser_pok = winner_pok == @player.pokemon ? @bot.pokemon : @player.pokemon
+    winner_pok.increase_stats(losser_pok)
+    puts '-' * 50
+    puts "#{losser_pok.name} FAINTED"
+    puts '-' * 50
+    puts "#{winner_pok.name} WINS!"
+    puts "-------------------Battle Ended!-------------------"
   end
 
   def display_damage(defender, attacker)

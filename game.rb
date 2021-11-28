@@ -123,7 +123,7 @@ class Game
     decision = ''
     while (decision.strip.empty? || (decision != option1 && decision != option2))
       print "> "
-      decision = gets.chomp
+      decision = gets.chomp.capitalize
     end
     decision
   end #este método también se puede usar dentro del de batalla para la elección de movimientos

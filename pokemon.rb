@@ -7,7 +7,7 @@ class Pokemon
   include Initials
   # include neccesary modules
   # all these accesor just for testing purposes
-  attr_accessor :species, :name, :type, :base_exp, :effort_points, :growth_rate, :hp, :attack, :defense, :speed, :moves, :base_stats, :level, :stats, :exp_points
+  attr_accessor :species, :name, :type, :base_exp, :effort_points, :growth_rate, :hp, :attack, :defense, :speed, :moves, :base_stats, :level, :stats, :exp_points, :effort_values
 
   def initialize (selected_pokemon, name, level)
     # Retrieve pokemon info from Pokedex and set instance variables
@@ -91,49 +91,47 @@ class Pokemon
     # INCREASE XP
     ##############
     gained_exp = calculate_gain_exp(defeated_pokemon)
-    @exp_points += gained_exp
+    self.exp_points += gained_exp
 
-    puts "#{@name} gained #{gained_exp} experience points"
+    puts "#{self.name} gained #{gained_exp} experience points"
 
     ##############
     # INCREASE EFFORT POINTS
     ##############
     effort_points = defeated_pokemon.effort_points
-    @effort_values[effort_points[:type]] += effort_points[:amount]
+    self.effort_values[effort_points[:type]] += effort_points[:amount]
 
-    puts "#{@name} reached level #{@level}!" if check_level_up && @level != 1
-    puts "Exp_points: #{@exp_points}"
+    puts "#{self.name} reached level #{@level}!" if check_level_up && @level != 1
     calculate_stats
   end
 
-  # private methods:
-  # Create here auxiliary methods
-  private
-
-  def check_level_up
-    lvl_table = Pokedex::LEVEL_TABLES[@growth_rate]
-
-    base_exp_at_crr_level = lvl_table[@level - 1]
-    puts "base_exp_at_crr_level: #{base_exp_at_crr_level}"
-
-    new_level = lvl_table.reverse.find { |exp| exp <= @exp_points }
-
-    # return true
-    if @exp_points >= base_exp_at_crr_level
-      previous_level = @level
-      @level = lvl_table.index(new_level) + 1
-      return previous_level != @level
-    end
-  end
-
   def calculate_stats
-    @base_stats.map do |stat, value|
+    self.base_stats.map do |stat, value|
       case stat
       when :hp
-        @stats[:hp] = hp_stat
+        self.stats[:hp] = hp_stat
       else
-        @stats[stat] = other_stats(stat, value)
+        self.stats[stat] = other_stats(stat, value)
       end
     end
   end
+
+  private
+
+  def check_level_up
+    lvl_table = Pokedex::LEVEL_TABLES[self.growth_rate]
+
+    base_exp_at_crr_level = lvl_table[self.level - 1]
+
+    new_level = lvl_table.reverse.find { |exp| exp <= self.exp_points }
+
+    # return true
+    if self.exp_points >= base_exp_at_crr_level
+      previous_level = self.level
+      self.level = lvl_table.index(new_level) + 1
+      return previous_level != self.level
+    end
+  end
+
+
 end

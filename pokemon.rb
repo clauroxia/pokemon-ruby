@@ -2,7 +2,7 @@
 require_relative "pokedex/pokemons"
 require_relative "stats"
 class Pokemon
-  include Stat_formulas
+  include StatFormulas
   # include neccesary modules
   # all these accesor just for testing purposes
   attr_accessor :species, :name, :type, :base_exp, :effort_points, :growth_rate, :hp, :attack, :defense, :speed,

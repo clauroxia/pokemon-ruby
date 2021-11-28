@@ -5,8 +5,8 @@ module Initials
 #$##$##$##$ ---        Pokemon Ruby         --- #$##$##$#$#
 #$#$#$#$#$#$#$                               $#$#$#$#$#$#$#
 #$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#$#\n\n"
-    puts "Hello there! Welcome to the world of POKEMON! My name is OAK!
-    People call me the POKEMON PROF!\n\n"
+    puts "Hello there! Welcome to the world of POKEMON! My name is OAK!"
+    puts "People call me the POKEMON PROF!\n\n"
 
     puts "This world is inhabited by creatures called POKEMON! For some"
 

@@ -6,9 +6,9 @@ require_relative "player"
 
 class Game
   include Initials
-  include Stat_formulas
+  include StatFormulas
   def start
-    # welcome
+    welcome
     @player_name = validate_name
     @pokemon = validate_pokemon
 

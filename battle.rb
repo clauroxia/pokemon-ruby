@@ -15,15 +15,16 @@ class Battle
   end
 
   def start
-    winner_pok = @player.pokemon
-    winner_pok.increase_stats(@bot.pokemon)
-
+    first_and_after_round
+    # winner_pok = @player.pokemon
+    # winner_pok.increase_stats(@bot.pokemon)
+    # damage = calc_damage(@bot.pokemon.type)
+    # puts "#{@player_name} #{@player.pokemon.name} used #{@movement[:name]} and dealt #{damage} damage to #{@bot.pokemon.name}!"
     # Prepare the Battle (print messages and prepare pokemons)
     # Until one pokemon faints
     # --Print Battle Status
     # --Both players select their moves
-    damage = calc_damage(@bot.pokemon.type)
-    puts "Player #{@player.pokemon.name} used #{@movement[:name]} and dealt #{damage} damage to #{@bot.pokemon.name}!"
+    
     # --Calculate which go first and which second
 
     # --First attack second
@@ -33,7 +34,6 @@ class Battle
 
     # Check which player won and print messages
     # If the winner is the Player increase pokemon stats
-    first_and_after_round
   end
 
   def first_and_after_round
@@ -46,7 +46,6 @@ class Battle
     @move_selected = take_decision(@player.pokemon.moves[0], @player.pokemon.moves[1])
     puts "\n\n#{'-' * 50}"
     puts "#{@player.name} used #{@move_selected}"
-    effectiveness
   end
 
   def take_decision(option1, option2)

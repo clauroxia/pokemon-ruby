@@ -1,4 +1,3 @@
-# require neccesary files
 class Player
   attr_accessor :name, :pokemon, :selected_move
   def initialize(player_name, pokemon, pokemon_name, level)

@@ -1,8 +1,10 @@
 # require neccesary files
 require_relative 'pokedex/pokemons'
+require_relative 'initials'
 require_relative 'stats'
 class Pokemon
   include Stat_formulas
+  include Initials
   # include neccesary modules
   # all these accesor just for testing purposes
   attr_accessor :species, :name, :type, :base_exp, :effort_points, :growth_rate, :hp, :attack, :defense, :speed, :moves, :base_stats, :level, :stats, :exp_points
@@ -43,8 +45,14 @@ class Pokemon
   # If level is not 1, calculate the minimum experience point for that level and store it in instance variable. (DONE)
   
   # Calculate pokemon stats and store them in instance variable 
-  def prepare_for_battle
+  def prepare_for_battle(player, option)
     # Complete this
+    case option
+    when 'player'
+      @selected_move = validate_move(player)
+    else
+      @selected_move = @moves.sample
+    end
   end
 
   def receive_damage
@@ -53,13 +61,14 @@ class Pokemon
 
   def set_current_move
     # Complete this
+
   end
 
   def fainted?
     # Complete this
   end
 
-  # def attack(target)
+  def attack(target)
     # Print attack message 'Tortuguita used MOVE!'
     # Accuracy check
     # If the movement is not missed
@@ -73,7 +82,7 @@ class Pokemon
     # ---- "It doesn't affect [target name]!" when effectivenes is 0
     # -- Inflict damage to target and print message "And it hit [target name] with [damage] damage""
     # Else, print "But it MISSED!"
-  # end
+  end
 
   def increase_stats(defeated_pokemon)
     # Increase stats base on the defeated pokemon and print message "#[pokemon name] gained [amount] experience points"

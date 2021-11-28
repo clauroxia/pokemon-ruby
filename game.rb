@@ -138,7 +138,3 @@ end
 game = Game.new
 game.start
 game.goodbye
-# effectiveness = 1
-# multiplier = {}
-# effectiveness *= multiplier.empty? ? 1 : multiplier[:multiplier] 
-# puts effectiveness

@@ -1,7 +1,7 @@
 require_relative 'pokedex/moves'
 require_relative 'stats'
 class Battle
-  include DamageFormulas
+  include Damage_formulas
   # (complete parameters)
   attr_accessor :player, :bot
 

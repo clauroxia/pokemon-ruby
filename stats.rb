@@ -1,4 +1,4 @@
-module StatFormulas
+module Stat_formulas
   # needed data
   def hp_stat
     ((((2 * @base_stats[:hp]) + @individual_values[:hp] + @effort_values[:hp]) * @level / 100) + @level + 10).floor

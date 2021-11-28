@@ -6,7 +6,7 @@ require_relative "player"
 
 class Game
   include Initials
-  include StatFormulas
+  include Stat_formulas
   def start
     welcome
     @player_name = validate_name

@@ -4,21 +4,21 @@ module Pokedex
       name: "tackle",
       type: :normal,
       power: 40,
-      accuracy: 100,
+      accuracy: 20,
       priority: 0
     },
     "vine whip" => {
       name: "vine whip",
       type: :grass,
       power: 45,
-      accuracy: 100,
+      accuracy: 10,
       priority: 0
     },
     "scratch" => {
       name: "scratch",
       type: :normal,
       power: 40,
-      accuracy: 100,
+      accuracy: 40,
       priority: 0
     },
     "ember" => {

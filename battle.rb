@@ -77,14 +77,27 @@ class Battle
     puts '-' * 50
 
     puts "#{first_move[0].name} used #{first_move[1][:name].capitalize}"
-    damage = display_damage(second_move)
-    second_move[0].pokemon.receive_damage(damage)
+
+    if check_accuracy(first_move)
+      damage = display_damage(second_move, first_move)
+      second_move[0].pokemon.receive_damage(damage)
+      puts "And it hit #{second_move[0].pokemon.name} with #{damage} damage"
+    else
+      damage = display_damage(second_move, first_move)
+      puts "But it MISSED!"
+    end
 
     puts '-' * 50
-
+    
     puts "#{second_move[0].name} used #{second_move[1][:name].capitalize}"
-    damage = display_damage(first_move)
-    first_move[0].pokemon.receive_damage(damage)
+    if check_accuracy(first_move)
+      damage = display_damage(first_move, second_move)
+      first_move[0].pokemon.receive_damage(damage)
+      puts "And it hit #{first_move[0].pokemon.name} with #{damage} damage"
+    else
+      damage = display_damage(second_move, first_move)
+      puts "But it MISSED!"
+    end
     puts '-' * 50
   end
 
@@ -95,11 +108,14 @@ class Battle
     puts
   end
 
-  def display_damage(defender)
+  def display_damage(defender, attacker)
     damage = calc_damage(defender[0],defender[1])
     puts "It was a CRITICAL hit!" if critical_hit?
     puts @effectiveness_message unless @effectiveness_message.empty?
-    puts "And it hit #{defender[0].pokemon.name} with #{damage} damage"
     return damage
+  end
+
+  def check_accuracy(move)
+    rand(1..100) <= move[1][:accuracy]
   end
 end

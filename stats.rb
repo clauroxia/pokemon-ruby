@@ -52,7 +52,7 @@ module Damage_formulas
   end
   
   def comp_effectiveness_msgs (effectivenes)
-    if effectivenes >= 2
+    if effectivenes >= 1.5
       @effectiveness_message = "It's super effective!"
     elsif effectivenes == 1
       @effectiveness_message = ''

@@ -3,7 +3,7 @@ require_relative "pokedex/moves"
 require_relative "stats"
 
 class Battle
-  include Damage_formulas
+  include DamageFormulas
   # (complete parameters)
 
   def initialize(player, bot)

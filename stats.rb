@@ -18,7 +18,7 @@ module StatFormulas
 end
 
 # INCOMPLETE MODULE
-module Damage_formulas
+module DamageFormulas
   def calc_damage(defender_type_move)
     base_dmg = ((((2 * @player.pokemon.level / 5.0) + 2).floor * calc_special_mov(@player.pokemon.stats[:special_attack],
                                                                                   "attack") * @movement[:power] / calc_special_mov(@player.pokemon.stats[:special_defense],
@@ -36,7 +36,8 @@ module Damage_formulas
     rand(1..16) == 1
   end
 
-  def calc_effectiveness(enemy_types) # enemy_types is an array of types
+  # enemy_types is an array of types
+  def calc_effectiveness(enemy_types)
     effectiveness = 1
     movement = @movement[:type]
     multiplier_table = Pokedex::TYPE_MULTIPLIER

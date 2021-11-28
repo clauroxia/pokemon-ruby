@@ -1,11 +1,11 @@
 # This module is incomplete since we need first to go further with implementation of the battle class
-require_relative 'pokedex/moves'
-require_relative 'stats'
+require_relative "pokedex/moves"
+require_relative "stats"
 
 class Battle
   include Damage_formulas
   # (complete parameters)
-  
+
   def initialize(player, bot)
     @movement = Pokedex::MOVES["tackle"] # temporal till we have the battle class
     @special_movs_list = Pokedex::SPECIAL_MOVE_TYPE
@@ -13,11 +13,11 @@ class Battle
     @player = player
     @bot = bot
   end
-  
+
   def start
     winner_pok = @player.pokemon
     winner_pok.increase_stats(@bot.pokemon)
-    
+
     # Prepare the Battle (print messages and prepare pokemons)
     # Until one pokemon faints
     # --Print Battle Status
@@ -35,7 +35,7 @@ class Battle
     # If the winner is the Player increase pokemon stats
     first_and_after_round
   end
-  
+
   def first_and_after_round
     puts "#{@player.name}'s #{@player.pokemon.name} - Level #{@player.pokemon.level}"
     puts "HP: #{@player.pokemon.stats[:hp]}"
@@ -50,8 +50,8 @@ class Battle
   end
 
   def take_decision(option1, option2)
-    decision = ''
-    while (decision.strip.empty? || (decision != option1 && decision != option2))
+    decision = ""
+    while decision.strip.empty? || (decision != option1 && decision != option2)
       print "> "
       decision = gets.chomp
     end
@@ -59,7 +59,7 @@ class Battle
   end
 
   def effectiveness
-    move_with_char = Pokedex::MOVES.find { |move, move_char| move == @move_selected } #array["move", hash_with_char]
+    move_with_char = Pokedex::MOVES.find { |move, _move_char| move == @move_selected } # array["move", hash_with_char]
     p move_with_char
     @type_bot_poke = @bot.pokemon.type
     p @type_bot_poke
@@ -70,7 +70,7 @@ class Battle
 
       second_array_hashes_to_find = Pokedex::TYPE_MULTIPLIER.select { |hash| hash[:user] == move_with_char[1][:type] }
       second_one_hash = second_array_hashes_to_find.find { |hash| hash[:target] == @type_bot_poke[1] }
-      p second_one_has[:multiplier]
+      p second_one_hash[:multiplier]
     else
       array_hashes_to_find = Pokedex::TYPE_MULTIPLIER.select { |hash| hash[:user] == move_with_char[1][:type] }
       one_hash = array_hashes_to_find.find { |hash| hash[:target] == @type_bot_poke[0] }

@@ -71,6 +71,22 @@ module Initials
     end
     selected_option
   end
+
+  def validate_move(player)
+    puts "#{player.name}, select your move:"
+
+    pok_moves = player.pokemon.moves
+    player.pokemon.moves.each.with_index do |move, i|
+      print "#{i + 1}. #{move}     "
+    end
+    puts
+    selected_option = ''
+    until pok_moves.find { |option| selected_option == option} && !selected_option.strip.empty?
+      print "> "
+      selected_option = gets.chomp.strip.downcase
+    end
+    return selected_option
+  end
 end
 
 ##################################################################

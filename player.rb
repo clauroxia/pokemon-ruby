@@ -1,4 +1,3 @@
-# require neccesary files
 class Player
   attr_accessor :name, :pokemon, :selected_move
 
@@ -23,7 +22,7 @@ class Bot < Player
 
   def initialize
     @pokemon = Pokedex::POKEMONS.keys.sample
-    super("Random Person", @pokemon, @pokemon, rand(1..15))
+    super("Random Person", @pokemon, @pokemon, rand(1..7))
   end
 
   def select_move

@@ -55,17 +55,16 @@ class Pokemon
     end
   end
 
-  def receive_damage
-    # Complete this
+  def receive_damage(damage)
+    self.stats[:hp] -= damage
   end
 
   def set_current_move
     # Complete this
-
   end
 
   def fainted?
-    # Complete this
+    self.stats[:hp] <= 0
   end
 
   def attack(target)

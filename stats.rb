@@ -27,8 +27,10 @@ module Damage_formulas
     if critical_hit?
       base_dmg *= 1.5
       base_dmg *= calc_effectiveness(defender.pokemon.type, defender_move)
+      base_dmg.floor
     else
       base_dmg *= calc_effectiveness(defender.pokemon.type, defender_move)
+      base_dmg.floor
     end
   end
 

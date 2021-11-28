@@ -1,4 +1,3 @@
-# This module is incomplete since we need first to go further with implementation of the battle class
 require_relative 'pokedex/moves'
 require_relative 'stats'
 class Battle
@@ -78,13 +77,14 @@ class Battle
     puts '-' * 50
 
     puts "#{first_move[0].name} used #{first_move[1][:name].capitalize}"
-    display_damage(second_move)
+    damage = display_damage(second_move)
+    second_move[0].pokemon.receive_damage(damage)
 
     puts '-' * 50
 
     puts "#{second_move[0].name} used #{second_move[1][:name].capitalize}"
-    display_damage(first_move)
-
+    damage = display_damage(first_move)
+    first_move[0].pokemon.receive_damage(damage)
     puts '-' * 50
   end
 
@@ -100,5 +100,6 @@ class Battle
     puts "It was a CRITICAL hit!" if critical_hit?
     puts @effectiveness_message unless @effectiveness_message.empty?
     puts "And it hit #{defender[0].pokemon.name} with #{damage} damage"
+    return damage
   end
 end

@@ -32,7 +32,6 @@ class Game
         action = validate_options
       end
     end
-
     # goodbye
   end
 
@@ -47,7 +46,7 @@ class Game
       # Just hardcode to make sure damage formulas are working
       battle = Battle.new(@player, @bot)
       battle.start 
-    else
+    when 'Leave'
       puts "You escaped!"
     end
   end

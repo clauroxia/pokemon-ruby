@@ -1,5 +1,6 @@
 class Player
   attr_accessor :name, :pokemon, :selected_move
+
   def initialize(player_name, pokemon, pokemon_name, level)
     @name = player_name
     @pokemon = Pokemon.new(pokemon, pokemon_name, nil ? 1 : level)
@@ -18,6 +19,7 @@ end
 
 class Bot < Player
   attr_accessor :pokemon
+
   def initialize
     @pokemon = Pokedex::POKEMONS.keys.sample
     super("Random Person", @pokemon, @pokemon, rand(1..7))
@@ -27,7 +29,5 @@ class Bot < Player
     movement_pokemon_bot = @pokemon.moves.sample
   end
 end
-
-
 
 # Create a class Bot that inherits from Player and override the select_move method

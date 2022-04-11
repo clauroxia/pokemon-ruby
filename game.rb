@@ -45,8 +45,8 @@ class Game
 
       # Just hardcode to make sure damage formulas are working
       battle = Battle.new(@player, @bot)
-      battle.start 
-    when 'Leave'
+      battle.start
+    when "Leave"
       puts "You escaped!"
     end
   end

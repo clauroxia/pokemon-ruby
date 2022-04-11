@@ -1,14 +1,14 @@
 # require neccesary files
-require_relative 'pokedex/pokemons'
-require_relative 'initials'
-require_relative 'stats'
+require_relative "pokedex/pokemons"
+require_relative "initials"
+require_relative "stats"
 class Pokemon
   include Stat_formulas
   include Initials
   # include neccesary modules
   # all these accesor just for testing purposes
-  attr_accessor :species, :name, :type, :base_exp, :effort_points, :growth_rate, :hp, :attack, :defense, :speed, :moves, :base_stats, :level, :stats, :exp_points, :effort_values
-
+  attr_accessor :species, :name, :type, :base_exp, :effort_points, :growth_rate, :hp, :attack, :defense, :speed,
+                :moves, :base_stats, :level, :stats, :exp_points, :effort_values
 
   def initialize(selected_pokemon, name, level)
     # Retrieve pokemon info from Pokedex and set instance variables
@@ -44,21 +44,20 @@ class Pokemon
   # If level is 1, set experience points to 0 in instance variable. (DONE)
 
   # If level is not 1, calculate the minimum experience point for that level and store it in instance variable. (DONE)
-  
-  # Calculate pokemon stats and store them in instance variable 
-  def prepare_for_battle(player, option)
 
+  # Calculate pokemon stats and store them in instance variable
+  def prepare_for_battle(player, option)
     # Complete this
-    case option
-    when 'player'
-      @selected_move = validate_move(player)
-    else
-      @selected_move = @moves.sample
-    end
+    @selected_move = case option
+                     when "player"
+                       validate_move(player)
+                     else
+                       @moves.sample
+                     end
   end
 
   def receive_damage(damage)
-    self.stats[:hp] -= damage
+    stats[:hp] -= damage
   end
 
   def set_current_move
@@ -66,7 +65,7 @@ class Pokemon
   end
 
   def fainted?
-    self.stats[:hp] <= 0
+    stats[:hp] <= 0
   end
 
   def attack(target)
@@ -85,7 +84,6 @@ class Pokemon
     # Else, print "But it MISSED!"
   end
 
-
   def increase_stats(defeated_pokemon)
     # Increase stats base on the defeated pokemon and print message "#[pokemon name] gained [amount] experience points"
 
@@ -96,25 +94,25 @@ class Pokemon
     gained_exp = calculate_gain_exp(defeated_pokemon)
     self.exp_points += gained_exp
 
-    puts "#{self.name} gained #{gained_exp} experience points"
+    puts "#{name} gained #{gained_exp} experience points"
 
     ##############
     # INCREASE EFFORT POINTS
     ##############
     effort_points = defeated_pokemon.effort_points
-    self.effort_values[effort_points[:type]] += effort_points[:amount]
+    effort_values[effort_points[:type]] += effort_points[:amount]
 
-    puts "#{self.name} reached level #{@level}!" if check_level_up && @level != 1
+    puts "#{name} reached level #{@level}!" if check_level_up && @level != 1
     calculate_stats
   end
 
   def calculate_stats
-    self.base_stats.map do |stat, value|
+    base_stats.map do |stat, value|
       case stat
       when :hp
-        self.stats[:hp] = hp_stat
+        stats[:hp] = hp_stat
       else
-        self.stats[stat] = other_stats(stat, value)
+        stats[stat] = other_stats(stat, value)
       end
     end
   end
@@ -122,20 +120,18 @@ class Pokemon
   private
 
   def check_level_up
-    lvl_table = Pokedex::LEVEL_TABLES[self.growth_rate]
+    lvl_table = Pokedex::LEVEL_TABLES[growth_rate]
 
-    base_exp_at_crr_level = lvl_table[self.level - 1]
+    base_exp_at_crr_level = lvl_table[level - 1]
 
     new_level = lvl_table.reverse.find { |exp| exp <= self.exp_points }
 
     # return true
     if self.exp_points >= base_exp_at_crr_level
-      previous_level = self.level
+      previous_level = level
       self.level = lvl_table.index(new_level) + 1
-      return previous_level != self.level
+      previous_level != level
 
     end
   end
-
-
 end

@@ -80,12 +80,12 @@ module Initials
       print "#{i + 1}. #{move}     "
     end
     puts
-    selected_option = ''
-    until pok_moves.find { |option| selected_option == option} && !selected_option.strip.empty?
+    selected_option = ""
+    until pok_moves.find { |option| selected_option == option } && !selected_option.strip.empty?
       print "> "
       selected_option = gets.chomp.strip.downcase
     end
-    return selected_option
+    selected_option
   end
 end
 
